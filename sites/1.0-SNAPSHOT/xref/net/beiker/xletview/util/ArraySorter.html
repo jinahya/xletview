@@ -1,0 +1,72 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head><meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+<title>ArraySorter xref</title>
+<link type="text/css" rel="stylesheet" href="../../../../stylesheet.css" />
+</head>
+<body>
+<div id="overview"><a href="../../../../../apidocs/net/beiker/xletview/util/ArraySorter.html">View Javadoc</a></div><pre>
+<a class="jxr_linenumber" name="L1" href="#L1">1</a>   <strong class="jxr_keyword">package</strong> net.beiker.xletview.util;
+<a class="jxr_linenumber" name="L2" href="#L2">2</a>   
+<a class="jxr_linenumber" name="L3" href="#L3">3</a>   <strong class="jxr_keyword">public</strong> <strong class="jxr_keyword">class</strong> <a href="../../../../net/beiker/xletview/util/ArraySorter.html">ArraySorter</a> {
+<a class="jxr_linenumber" name="L4" href="#L4">4</a>   	<em class="jxr_comment">/*</em>
+<a class="jxr_linenumber" name="L5" href="#L5">5</a>   <em class="jxr_comment">	 * * Sort in the same array</em>
+<a class="jxr_linenumber" name="L6" href="#L6">6</a>   <em class="jxr_comment">	 */</em>
+<a class="jxr_linenumber" name="L7" href="#L7">7</a>   	<strong class="jxr_keyword">public</strong> <strong class="jxr_keyword">static</strong> <strong class="jxr_keyword">void</strong> sort(Object[] a, <a href="../../../../net/beiker/xletview/util/Comparer.html">Comparer</a> comparer) {
+<a class="jxr_linenumber" name="L8" href="#L8">8</a>   		sort(a, <strong class="jxr_keyword">null</strong>, 0, a.length - 1, <strong class="jxr_keyword">true</strong>, comparer);
+<a class="jxr_linenumber" name="L9" href="#L9">9</a>   	}
+<a class="jxr_linenumber" name="L10" href="#L10">10</a>  
+<a class="jxr_linenumber" name="L11" href="#L11">11</a>  	<em class="jxr_comment">/*</em>
+<a class="jxr_linenumber" name="L12" href="#L12">12</a>  <em class="jxr_comment">	 * * Sort a and b, using a as the reference</em>
+<a class="jxr_linenumber" name="L13" href="#L13">13</a>  <em class="jxr_comment">	 */</em>
+<a class="jxr_linenumber" name="L14" href="#L14">14</a>  	<strong class="jxr_keyword">public</strong> <strong class="jxr_keyword">static</strong> <strong class="jxr_keyword">void</strong> sort(Object[] a, Object[] b, <strong class="jxr_keyword">int</strong> from, <strong class="jxr_keyword">int</strong> to, <strong class="jxr_keyword">boolean</strong> ascending, <a href="../../../../net/beiker/xletview/util/Comparer.html">Comparer</a> comparer) {
+<a class="jxr_linenumber" name="L15" href="#L15">15</a>  		<em class="jxr_comment">// No sort</em>
+<a class="jxr_linenumber" name="L16" href="#L16">16</a>  		<strong class="jxr_keyword">if</strong> (a == <strong class="jxr_keyword">null</strong> || a.length &lt; 2)
+<a class="jxr_linenumber" name="L17" href="#L17">17</a>  			<strong class="jxr_keyword">return</strong>;
+<a class="jxr_linenumber" name="L18" href="#L18">18</a>  
+<a class="jxr_linenumber" name="L19" href="#L19">19</a>  		<em class="jxr_comment">// sort using Quicksort</em>
+<a class="jxr_linenumber" name="L20" href="#L20">20</a>  		<strong class="jxr_keyword">int</strong> i = from, j = to;
+<a class="jxr_linenumber" name="L21" href="#L21">21</a>  		Object center = a[(from + to) / 2];
+<a class="jxr_linenumber" name="L22" href="#L22">22</a>  		<strong class="jxr_keyword">do</strong> {
+<a class="jxr_linenumber" name="L23" href="#L23">23</a>  			<strong class="jxr_keyword">if</strong> (ascending) {
+<a class="jxr_linenumber" name="L24" href="#L24">24</a>  				<strong class="jxr_keyword">while</strong> ((i &lt; to) &amp;&amp; (comparer.compare(center, a[i]) &gt; 0))
+<a class="jxr_linenumber" name="L25" href="#L25">25</a>  					i++;
+<a class="jxr_linenumber" name="L26" href="#L26">26</a>  				<strong class="jxr_keyword">while</strong> ((j &gt; from) &amp;&amp; (comparer.compare(center, a[j]) &lt; 0))
+<a class="jxr_linenumber" name="L27" href="#L27">27</a>  					j--;
+<a class="jxr_linenumber" name="L28" href="#L28">28</a>  			} <strong class="jxr_keyword">else</strong> {
+<a class="jxr_linenumber" name="L29" href="#L29">29</a>  				<em class="jxr_comment">// Decending sort</em>
+<a class="jxr_linenumber" name="L30" href="#L30">30</a>  				<strong class="jxr_keyword">while</strong> ((i &lt; to) &amp;&amp; (comparer.compare(center, a[i]) &lt; 0))
+<a class="jxr_linenumber" name="L31" href="#L31">31</a>  					i++;
+<a class="jxr_linenumber" name="L32" href="#L32">32</a>  				<strong class="jxr_keyword">while</strong> ((j &gt; from) &amp;&amp; (comparer.compare(center, a[j]) &gt; 0))
+<a class="jxr_linenumber" name="L33" href="#L33">33</a>  					j--;
+<a class="jxr_linenumber" name="L34" href="#L34">34</a>  			}
+<a class="jxr_linenumber" name="L35" href="#L35">35</a>  			<strong class="jxr_keyword">if</strong> (i &lt; j) {
+<a class="jxr_linenumber" name="L36" href="#L36">36</a>  				<em class="jxr_comment">// Swap elements</em>
+<a class="jxr_linenumber" name="L37" href="#L37">37</a>  				Object temp = a[i];
+<a class="jxr_linenumber" name="L38" href="#L38">38</a>  				a[i] = a[j];
+<a class="jxr_linenumber" name="L39" href="#L39">39</a>  				a[j] = temp;
+<a class="jxr_linenumber" name="L40" href="#L40">40</a>  				<em class="jxr_comment">// Swap in b array if needed</em>
+<a class="jxr_linenumber" name="L41" href="#L41">41</a>  				<strong class="jxr_keyword">if</strong> (b != <strong class="jxr_keyword">null</strong>) {
+<a class="jxr_linenumber" name="L42" href="#L42">42</a>  					temp = b[i];
+<a class="jxr_linenumber" name="L43" href="#L43">43</a>  					b[i] = b[j];
+<a class="jxr_linenumber" name="L44" href="#L44">44</a>  					b[j] = temp;
+<a class="jxr_linenumber" name="L45" href="#L45">45</a>  				}
+<a class="jxr_linenumber" name="L46" href="#L46">46</a>  			}
+<a class="jxr_linenumber" name="L47" href="#L47">47</a>  			<strong class="jxr_keyword">if</strong> (i &lt;= j) {
+<a class="jxr_linenumber" name="L48" href="#L48">48</a>  				i++;
+<a class="jxr_linenumber" name="L49" href="#L49">49</a>  				j--;
+<a class="jxr_linenumber" name="L50" href="#L50">50</a>  			}
+<a class="jxr_linenumber" name="L51" href="#L51">51</a>  		}
+<a class="jxr_linenumber" name="L52" href="#L52">52</a>  		<strong class="jxr_keyword">while</strong> (i &lt;= j);
+<a class="jxr_linenumber" name="L53" href="#L53">53</a>  		<em class="jxr_comment">// Sort the rest</em>
+<a class="jxr_linenumber" name="L54" href="#L54">54</a>  		<strong class="jxr_keyword">if</strong> (from &lt; j)
+<a class="jxr_linenumber" name="L55" href="#L55">55</a>  			sort(a, b, from, j, ascending, comparer);
+<a class="jxr_linenumber" name="L56" href="#L56">56</a>  		<strong class="jxr_keyword">if</strong> (i &lt; to)
+<a class="jxr_linenumber" name="L57" href="#L57">57</a>  			sort(a, b, i, to, ascending, comparer);
+<a class="jxr_linenumber" name="L58" href="#L58">58</a>  	}
+<a class="jxr_linenumber" name="L59" href="#L59">59</a>  }
+</pre>
+<hr/>
+<div id="footer">Copyright &#169; 2014. All rights reserved.</div>
+</body>
+</html>

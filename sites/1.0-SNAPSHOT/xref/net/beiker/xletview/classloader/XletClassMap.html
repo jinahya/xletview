@@ -1,0 +1,47 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head><meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+<title>XletClassMap xref</title>
+<link type="text/css" rel="stylesheet" href="../../../../stylesheet.css" />
+</head>
+<body>
+<div id="overview"><a href="../../../../../apidocs/net/beiker/xletview/classloader/XletClassMap.html">View Javadoc</a></div><pre>
+<a class="jxr_linenumber" name="L1" href="#L1">1</a>   <strong class="jxr_keyword">package</strong> net.beiker.xletview.classloader;
+<a class="jxr_linenumber" name="L2" href="#L2">2</a>   
+<a class="jxr_linenumber" name="L3" href="#L3">3</a>   <strong class="jxr_keyword">import</strong> javassist.ClassMap;
+<a class="jxr_linenumber" name="L4" href="#L4">4</a>   
+<a class="jxr_linenumber" name="L5" href="#L5">5</a>   <em class="jxr_javadoccomment">/**</em>
+<a class="jxr_linenumber" name="L6" href="#L6">6</a>   <em class="jxr_javadoccomment"> *</em>
+<a class="jxr_linenumber" name="L7" href="#L7">7</a>   <em class="jxr_javadoccomment"> * @author Martin Sveden</em>
+<a class="jxr_linenumber" name="L8" href="#L8">8</a>   <em class="jxr_javadoccomment"> */</em>
+<a class="jxr_linenumber" name="L9" href="#L9">9</a>   <strong class="jxr_keyword">public</strong> <strong class="jxr_keyword">class</strong> <a href="../../../../net/beiker/xletview/classloader/XletClassMap.html">XletClassMap</a> <strong class="jxr_keyword">extends</strong> ClassMap{
+<a class="jxr_linenumber" name="L10" href="#L10">10</a>  
+<a class="jxr_linenumber" name="L11" href="#L11">11</a>  	<strong class="jxr_keyword">public</strong> <a href="../../../../net/beiker/xletview/classloader/XletClassMap.html">XletClassMap</a>(){
+<a class="jxr_linenumber" name="L12" href="#L12">12</a>  		put(<span class="jxr_string">"java.io.File"</span>, <span class="jxr_string">"xjava.io.XFile"</span>);
+<a class="jxr_linenumber" name="L13" href="#L13">13</a>  		put(<span class="jxr_string">"java.io.FileInputStream"</span>, <span class="jxr_string">"xjava.io.FileInputStream"</span>);
+<a class="jxr_linenumber" name="L14" href="#L14">14</a>  		put(<span class="jxr_string">"java.io.FileOutputStream"</span>, <span class="jxr_string">"xjava.io.FileOutputStream"</span>);
+<a class="jxr_linenumber" name="L15" href="#L15">15</a>  		put(<span class="jxr_string">"java.io.FileReader"</span>, <span class="jxr_string">"xjava.io.FileReader"</span>);
+<a class="jxr_linenumber" name="L16" href="#L16">16</a>  		put(<span class="jxr_string">"java.io.FileWriter"</span>, <span class="jxr_string">"xjava.io.FileWriter"</span>);
+<a class="jxr_linenumber" name="L17" href="#L17">17</a>  		put(<span class="jxr_string">"java.awt.Toolkit"</span>, <span class="jxr_string">"xjava.awt.Toolkit"</span>);
+<a class="jxr_linenumber" name="L18" href="#L18">18</a>  		put(<span class="jxr_string">"java.lang.System"</span>, <span class="jxr_string">"xjava.lang.System"</span>);
+<a class="jxr_linenumber" name="L19" href="#L19">19</a>  		
+<a class="jxr_linenumber" name="L20" href="#L20">20</a>  	}
+<a class="jxr_linenumber" name="L21" href="#L21">21</a>  
+<a class="jxr_linenumber" name="L22" href="#L22">22</a>  	<strong class="jxr_keyword">public</strong> Object get(Object jvmClassName) {
+<a class="jxr_linenumber" name="L23" href="#L23">23</a>  		String name = toJavaName((String)jvmClassName);
+<a class="jxr_linenumber" name="L24" href="#L24">24</a>  		<em class="jxr_comment">//System.out.println("checking " + name);</em>
+<a class="jxr_linenumber" name="L25" href="#L25">25</a>  		<strong class="jxr_keyword">if</strong> (name.startsWith(<span class="jxr_string">"javax.tv."</span>)){
+<a class="jxr_linenumber" name="L26" href="#L26">26</a>  			<strong class="jxr_keyword">return</strong> toJvmName(<span class="jxr_string">"xjavax.tv."</span> + name.substring(9));
+<a class="jxr_linenumber" name="L27" href="#L27">27</a>  		}
+<a class="jxr_linenumber" name="L28" href="#L28">28</a>  		<strong class="jxr_keyword">else</strong>{
+<a class="jxr_linenumber" name="L29" href="#L29">29</a>  			<strong class="jxr_keyword">return</strong> <strong class="jxr_keyword">super</strong>.get(jvmClassName);
+<a class="jxr_linenumber" name="L30" href="#L30">30</a>  		}
+<a class="jxr_linenumber" name="L31" href="#L31">31</a>  	}
+<a class="jxr_linenumber" name="L32" href="#L32">32</a>  
+<a class="jxr_linenumber" name="L33" href="#L33">33</a>  
+<a class="jxr_linenumber" name="L34" href="#L34">34</a>  }
+</pre>
+<hr/>
+<div id="footer">Copyright &#169; 2014. All rights reserved.</div>
+</body>
+</html>
